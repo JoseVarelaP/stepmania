@@ -9,18 +9,18 @@ on:
 jobs:
   build:
 
-    # runs-on: ubuntu-18.04
-    runs-on: windows-2019
+    runs-on: ubuntu-18.04
+    # runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
-    - name: Generate CMake Code
+    # - name: Generate CMake Code
     # run: cmake -DCMAKE_BUILD_TYPE=Release .. && cmake ..
-      run: cd Build && cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
-    - name: Assign Solution file
-      run: devenv StepMania.sln /Build Release
-    # - name: Install libmad
-    #   run: sudo apt install libmad0-dev libogg-dev libvorbis-dev yasm libpulse-dev libasound2-dev libva-dev libgl1-mesa-dev libglew-dev
-    # - name: Genrate CMake code
-    #   run: cd Build && cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release ..
-    # - name: make
-    #   run: make
+    #   run: cd Build && cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
+    # - name: Assign Solution file
+    #   run: devenv StepMania.sln /Build Release
+    - name: Install Packages
+      run: sudo apt-get install build-essential cmake mesa-common-dev libglu1-mesa-dev libglew1.5-dev libxtst-dev libxrandr-dev libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libogg-dev libvorbis-dev libc6-dev yasm libasound-dev libpulse-dev binutils-dev libgtk2.0-dev libmad0-dev libudev-dev libva-dev nasm
+    - name: Genrate CMake code
+      run: cd Build && cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release ..
+    - name: make
+      run: make
