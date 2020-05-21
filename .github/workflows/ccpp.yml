@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install libmad
-      run: sudo apt install libmad0-dev libogg-dev libvorbis-dev
+      run: sudo apt install libmad0-dev libogg-dev libvorbis-dev yasm libpulse-dev libasound2-dev libva-dev
     - name: Genrate CMake code
       run: cd Build && cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release ..
     - name: make
