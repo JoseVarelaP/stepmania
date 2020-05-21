@@ -19,11 +19,11 @@ jobs:
     #   run: cd Build && cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
     # - name: Assign Solution file
     #   run: devenv StepMania.sln /Build Release
-    - name: Install brew
-      run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    #- name: Install brew
+    #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     - name: Install yasm
       run: brew install cmake yasm
-    - name: Genrate CMake code
+    - name: Generate CMake code
       run: cd Build && cmake -G 'Xcode' -DCMAKE_BUILD_TYPE=Release .. && cmake ..
-    - name: make
-      run: make
+    - name: Compile using xcodebuild
+      run: xcodebuild
