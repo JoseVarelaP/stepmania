@@ -28,4 +28,4 @@ jobs:
     - name: Generate CMake code
       run: cd Build && cmake -G 'Xcode' -DWITH_FFMPEG_JOBS=4 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
     - name: Compile using xcodebuild
-      run: xcodebuild
+      run: cd Build && xcodebuild
