@@ -21,6 +21,8 @@ jobs:
     #   run: devenv StepMania.sln /Build Release
     #- name: Install brew
     #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    - name: Update submodules
+      run: git submodule update --init
     - name: Install yasm
       run: brew install cmake yasm
     - name: Generate CMake code
