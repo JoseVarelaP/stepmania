@@ -13,13 +13,13 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
-    name: Move to Build Folder
-    run: cd Build
-    name: Generate CMake Code
+    - name: Move to Build Folder
+      run: cd Build
+    - name: Generate CMake Code
     # run: cmake -DCMAKE_BUILD_TYPE=Release .. && cmake ..
-    run: cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
-    name: Assign Solution file
-    run: devenv StepMania.sln /Build Release
+      run: cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
+    - name: Assign Solution file
+      run: devenv StepMania.sln /Build Release
     # - name: Install libmad
     #   run: sudo apt install libmad0-dev libogg-dev libvorbis-dev yasm libpulse-dev libasound2-dev libva-dev libgl1-mesa-dev libglew-dev
     # - name: Genrate CMake code
