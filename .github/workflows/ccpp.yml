@@ -9,11 +9,12 @@ on:
 jobs:
   build:
 
-    # runs-on: ubuntu-18.04
-    runs-on: macos-latest
+    runs-on: ubuntu-18.04
+    # runs-on: macos-latest
     # runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    
     # - name: Generate CMake Code
     # run: cmake -DCMAKE_BUILD_TYPE=Release .. && cmake ..
     #   run: cd Build && cmake -G "Visual Studio 14 2015" -A Win32 -DCMAKE_BUILD_TYPE=Release .. && cmake ..
@@ -21,13 +22,23 @@ jobs:
     #   run: devenv StepMania.sln /Build Release
     #- name: Install brew
     #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    - name: Pre Process, Update Brew
-      run: brew update
-    - name: Pre Process, Upgrade packages
-      run: brew upgrade cmake && brew install yasm
+
+    - name: Install packages
+      run: apt install libasound2-dev libglew-dev libmad0-dev libpulse-dev libva-dev libvorbis-dev libxinerama-dev libxrandr-dev libxtst-dev yasm
     - name: Update submodules
       run: git submodule update --init
     - name: Generate CMake code
-      run: cd Build && cmake .. -G 'Xcode' -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_C_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -DCMAKE_CXX_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++" -DWITH_FFMPEG_JOBS=2
-    - name: Compile using xcodebuild
-      run: cd Build && cmake --build . --parallel 2
+      run: cd Build && cmake .. -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+    - name: Compile now
+      run: cd Build && make
+    
+    # - name: Pre Process, Update Brew
+    #   run: brew update
+    # - name: Pre Process, Upgrade packages
+    #   run: brew upgrade cmake && brew install yasm
+    # - name: Update submodules
+    #   run: git submodule update --init
+    # - name: Generate CMake code
+    #   run: cd Build && cmake .. -G 'Xcode' -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_C_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -DCMAKE_CXX_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++" -DWITH_FFMPEG_JOBS=2
+    # - name: Compile using xcodebuild
+    #   run: cd Build && cmake --build . --parallel 2
