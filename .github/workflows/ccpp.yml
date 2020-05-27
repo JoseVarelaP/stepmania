@@ -24,7 +24,7 @@ jobs:
     #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
     - name: Install packages
-      run: apt install libasound2-dev libglew-dev libmad0-dev libpulse-dev libva-dev libvorbis-dev libxinerama-dev libxrandr-dev libxtst-dev yasm
+      run: sudo apt install libasound2-dev libglew-dev libmad0-dev libpulse-dev libva-dev libvorbis-dev libxinerama-dev libxrandr-dev libxtst-dev yasm
     - name: Update submodules
       run: git submodule update --init
     - name: Generate CMake code
