@@ -30,7 +30,7 @@ jobs:
     - name: Generate CMake code
       run: cd Build && cmake .. -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
     - name: Compile now
-      run: cd Build && make
+      run: cd Build && cmake --build . --parallel 2
     
     # - name: Pre Process, Update Brew
     #   run: brew update
