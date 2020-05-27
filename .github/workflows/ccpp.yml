@@ -21,11 +21,13 @@ jobs:
     #   run: devenv StepMania.sln /Build Release
     #- name: Install brew
     #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    - name: Pre Process, Update Brew
+      run: brew update
+    - name: Pre Process, Upgrade packages
+      run: brew upgrade cmake && brew install yasm
     - name: Update submodules
       run: git submodule update --init
-    - name: Install yasm
-      run: brew install cmake yasm
     - name: Generate CMake code
-      run: cd Build && cmake -G 'Xcode' -DWITH_FFMPEG_JOBS=2 -DCMAKE_BUILD_TYPE=Release CFLAGS=-stdlib=libc++ .. && cmake ..
+      run: cd Build && cmake -G 'Xcode' -DWITH_FFMPEG_JOBS=2 -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=Release .. && cmake ..
     - name: Compile using xcodebuild
       run: cd Build && cmake --build . --parallel 2
