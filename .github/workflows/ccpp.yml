@@ -24,7 +24,7 @@ jobs:
     - name: Pre Process, Update Brew
       run: brew update
     - name: Pre Process, Upgrade packages
-      run: brew upgrade cmake && brew install yasm && xcode-select --install
+      run: brew upgrade cmake && brew install yasm
     - name: Update submodules
       run: git submodule update --init
     - name: Generate CMake code
