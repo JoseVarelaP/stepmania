@@ -9,11 +9,11 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-18.04
-    # runs-on: macos-latest
-    # runs-on: windows-2019
-    steps:
-    - uses: actions/checkout@v2
+    # runs-on: ubuntu-18.04
+    # # runs-on: macos-latest
+    # # runs-on: windows-2019
+    # steps:
+    # - uses: actions/checkout@v2
     
     # - name: Generate CMake Code
     # run: cmake -DCMAKE_BUILD_TYPE=Release .. && cmake ..
@@ -23,14 +23,14 @@ jobs:
     #- name: Install brew
     #  run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-    - name: Install packages
-      run: sudo apt install libasound2-dev libglew-dev libmad0-dev libpulse-dev libva-dev libvorbis-dev libxinerama-dev libxrandr-dev libxtst-dev yasm
-    - name: Update submodules
-      run: git submodule update --init
-    - name: Generate CMake code
-      run: cd Build && cmake .. -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-    - name: Compile now
-      run: cd Build && cmake --build . --parallel 2
+    # - name: Install packages
+    #   run: sudo apt install libasound2-dev libglew-dev libmad0-dev libpulse-dev libva-dev libvorbis-dev libxinerama-dev libxrandr-dev libxtst-dev yasm
+    # - name: Update submodules
+    #   run: git submodule update --init
+    # - name: Generate CMake code
+    #   run: cd Build && cmake .. -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+    # - name: Compile now
+    #   run: cd Build && cmake --build . --parallel 2
     
     # - name: Pre Process, Update Brew
     #   run: brew update
@@ -42,3 +42,15 @@ jobs:
     #   run: cd Build && cmake .. -G 'Xcode' -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_C_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -DCMAKE_CXX_COMPILER="/Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++" -DWITH_FFMPEG_JOBS=2
     # - name: Compile using xcodebuild
     #   run: cd Build && cmake --build . --parallel 2
+  macos-build-bundled:
+    name: "macOS: Build with bundled libraries"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: brew install
+          nasm
+      - name: Configure
+        run: cmake -B build
+      - name: Build
+        run: cmake --build build
